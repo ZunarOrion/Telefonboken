@@ -14,8 +14,9 @@ export function LoginPage(): RouteEntry {
             <input type="text" id="register-password" placeholder="Password"></input>
             <button type="button" id="make-account-btn">Skapa konto</button>
         </div>
-            `,
+        `,
         logic: async () => {
+
         }
-    }
-}
+    };
+};
