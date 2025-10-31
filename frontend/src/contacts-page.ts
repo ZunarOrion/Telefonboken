@@ -1,8 +1,7 @@
-import type { RouteEntry } from "../types";
-
-export function ContactsPage(): RouteEntry {
-    return {
-        html: () => `
+export async function ContantsPage() {
+    const pageContent = document.querySelector('#page-content');
+    if (pageContent) {
+        pageContent.innerHTML = `
         <div>
             <container id="contact-form">
                 <input type="text" id="contact-phonenumber" placeholder="Telefonnummer"></input>
@@ -14,9 +13,6 @@ export function ContactsPage(): RouteEntry {
                 <li id="contacts"></li>
             </containter>
         </div>
-        `,
-        logic: async () => {
-
-        }
+        `;
     };
 };

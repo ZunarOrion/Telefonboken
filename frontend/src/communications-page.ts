@@ -1,8 +1,7 @@
-import type { RouteEntry } from "../types";
-
-export function CommunicationsPage(): RouteEntry {
-    return {
-        html: () => `
+export async function CommunicationPage() {
+    const pageContent = document.querySelector('#page-content');
+    if (pageContent) {
+        pageContent.innerHTML = `
         <div>
             <button type="button" id="call-btn">Ring: ${""}</button>
             <li id="chosen-contacts"></li>
@@ -12,9 +11,6 @@ export function CommunicationsPage(): RouteEntry {
             <input type="text" id="sms-input" placeholder="Skriv ett meddelande här"></input>
             <button type="button" id="send-sms-button">Skicka</button
         </div>
-        `,
-        logic: async () => {
-
-        }
+        `;
     };
 };
