@@ -1,22 +1,27 @@
-const createForm = document.getElementById
-const loginForm = document.getElementById
+const createForm = document.getElementById("create-form") as HTMLFormElement;
+const loginForm = document.getElementById("login-form");
 
-createForm.addEventListener("submit", (e) => {
+createForm.addEventListener("submit", async (e) => {
     e.preventDefault()
-    let email = document.getElementById().value
-    let password = document.getElementById().value
+    let email = document.getElementById("email-create") as HTMLInputElement;
+    let password = document.getElementById("password-create") as HTMLInputElement;
+    if (!email || !password) {
+        return
+    };
+    
 
-    console.log("email", email)
-    console.log("password", password)
-
-    fetch(url/localhost) {
+    const res = await fetch("http://localhost:3000/signup", {
         method: "post",
-        header: {
+        headers: {
             "content-type": "application/json"
         },
         body: JSON.stringify({
-            "email": email
-            "password": password
+            "email": email.value,
+            "password": password.value
         })
-    }
-})
+    });
+
+    const token = await res.text();
+
+    localStorage.setItem("token", token);
+});
