@@ -1,35 +1,73 @@
-import { userCollection } from "../services/db.ts";
-import { generateToken } from "../services/jwt.ts";
+import { SignupBody, LoginBody } from "../types/types.js";
+import { userCollection } from "../services/db.js";
+import { generateToken } from "../services/jwt.js";
+import { Request, Response } from "express";
 
+async function emailAvailable(email: string) {
+  let user;
+  try {
+    user = await userCollection.findOne({ email: email });
+  } catch (e) {
+    console.error(e);
+    throw new Error("Database error!");
+  }
+  if (user) {
+    return false;
+  } else {
+    return true;
+  }
+}
 
-export async function createUser ({req, res}) {
-    const formData = req.body
-    const email = formData.email
-    const password = formData.password
-    
-    try {
-        await userCollection.insertOne({
-            email: email,
-            password: password
-        });
-    } catch (e) {
-        console.log(e)
-    };
-    return res.send(generateToken({
-        email: email,
-        role: "user"
-    }));
+export async function signup(req: Request<{}, {}, SignupBody>, res: Response) {
+  const formData = req.body;
+  try {
+    if (await emailAvailable(formData.email)) {
+      const createdUser = await userCollection.insertOne({
+        email: formData.email,
+        password: formData.password,
+      });
+      return res.status(200).send(
+        await generateToken({
+          _id: createdUser.insertedId.toString(),
+          email: formData.email,
+        })
+      );
+    } else {
+      return res.status(400).send("Email already taken!");
+    }
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send("Internal server error");
+  }
+}
 
-
-
-//     const jwt = await new jose.SignJWT(data)
-//     .setProtectHeader({alg})
-//     .sign(secret)
-    
-//     return res.send(jwt)
-// };
-// const secret = new TextEncoder().encode{
-//     ""
-// };
-
-// const alg = "HS256"
+export async function login(req: Request<{}, {}, LoginBody>, res: Response) {
+  if (req.headers.authorization) {
+    return;
+  }
+  const formData = req.body;
+  try {
+    const user = await userCollection.findOne({
+      email: formData.email,
+      password: formData.password,
+    });
+    if (user) {
+      try {
+        return res.status(200).send(
+          await generateToken({
+            _id: user._id.toString(),
+            email: formData.email,
+          })
+        );
+      } catch (e) {
+        console.error(e);
+        return res.status(500).send("Internal error, try again!");
+      }
+    } else {
+      return res.status(400).send("Invalid credentials");
+    }
+  } catch (e) {
+    console.error(e);
+    return res.status(500).send("Internal server error");
+  }
+}

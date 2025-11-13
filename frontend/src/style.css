@@ -1,0 +1,172 @@
+/* General page layout */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for everything */
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Signup and Login div */
+#signup-form-div,
+#login-form-div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      
+  justify-content: center;  
+  background-color: #f8f9fa; 
+  font-family: Arial, sans-serif;
+}
+
+/* Div titles */
+#signup-form-div h1,
+#login-form-div h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Form layout */
+#signup-form,
+#login-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;          
+  gap: 0.75rem;          
+}
+
+/* Inputs and labels */
+#signup-form label,
+#login-form label {
+  font-weight: bold;
+}
+
+#signup-form input,
+#login-form input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Submit buttons */
+#signup-form input[type="submit"],
+#login-form input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#signup-form input[type="submit"]:hover,
+#login-form input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Logout button */
+#logout-button-div {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+#logout-button-div button {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#logout-button-div button:hover {
+  background-color: #c82333;
+}
+
+/* Main content */
+#phone-page-div {
+  max-width: 1000px;
+  margin: 80px auto 40px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Contact creation form */
+#create-contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+#create-contact-form input[type="text"],
+#create-contact-form input[type="submit"] {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+#create-contact-form input[type="submit"] {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#create-contact-form input[type="submit"]:hover {
+  background-color: #0069d9;
+}
+
+/* Contacts grid layout */
+#contacts-div {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+/* Contact card */
+.contact-card {
+  background-color: #f1f3f5;
+  border-radius: 8px;
+  padding: 15px 35px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.contact-card input[type="text"],
+.contact-card textarea {
+  width: 100%;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contact-card button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.contact-card button:hover {
+  background-color: #0056b3;
+}
+
+/* SMS box */
+.contact-sms-message textarea {
+  resize: none;
+  height: 60px;
+}

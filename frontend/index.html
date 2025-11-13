@@ -4,29 +4,24 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Telefonboken</title>
+        <link rel="stylesheet" href="src/style.css">
     </head>
     <body>
-        <div>
-            <h1>Logga in</h1>
-            <form action="get" id="login-form">
-                <label for="email-login">Email</label>
-                <input type="email" name="email-login" id="email-login">
-                <label for="password-login">Password</label>
-                <input type="password" name="password-login" id="password-login">
-                <input type="submit" value="Logga in">
-            </form>
+        <div id="app">
+            <div id="signup-form-div"></div>
+            <div id="login-form-div"></div>
+            <div id="logout-button-div"></div>
+
+            <div id="phone-page-div">
+                <h1>Telefonbok</h1>
+                <div id="contact-form-div"></div>
+                <h3>Mina kontakter:</h3>
+                <div id="contacts-div"></div>
+            </div>
         </div>
 
-        <div>
-            <h1>Skapa användare</h1>
-            <form action="post" id="create-form">
-                <label for="email-create">Email</label>
-                <input type="email" name="email-create" id="email-create">
-                <label for="password-create">Password</label>
-                <input type="password" name="password-create" id="password-create">
-                <input type="submit" value="Create User">
-            </form>
-        </div>
-        <script type="module" src="\src\main.ts"></script>
+        <script type="module" src="/src/main.ts"></script>
+        <script type="module" src="/src/phone.ts"></script>
+        <script type="module" src="/src/contact.ts"></script>
     </body>
 </html>
